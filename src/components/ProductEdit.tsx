@@ -18,7 +18,8 @@ import {
   useGetCategoriesQuery,
 } from "../api/productApi";
 import { UploadOutlined, ArrowLeftOutlined } from "@ant-design/icons";
-import dayjs from "dayjs";
+import dayjs from "dayjs"; // Ensure you have dayjs for date handling
+
 const { Option } = Select;
 
 const ProductEdit: React.FC = () => {
@@ -74,6 +75,7 @@ const ProductEdit: React.FC = () => {
 
   return (
     <div style={{ padding: "20px", maxWidth: "1200px", margin: "0 auto" }}>
+      {/* Back Button */}
       <div
         style={{
           display: "flex",
@@ -107,6 +109,7 @@ const ProductEdit: React.FC = () => {
         onFinish={onFinish}
         layout="vertical"
       >
+        {/* Form Fields */}
         <Form.Item
           name="title"
           label="Title"
@@ -202,7 +205,11 @@ const ProductEdit: React.FC = () => {
           <Input />
         </Form.Item>
         <Form.Item name={["meta", "qrCode"]} label="QR Code">
-          <Upload>
+          <Upload
+            listType="picture"
+            maxCount={1}
+            showUploadList={{ showRemoveIcon: true }}
+          >
             <Button icon={<UploadOutlined />}>Upload</Button>
           </Upload>
         </Form.Item>
@@ -218,12 +225,11 @@ const ProductEdit: React.FC = () => {
         <Form.List name="reviews">
           {(fields, { add, remove }) => (
             <>
-              {fields.map(({ key, name, fieldKey, ...restField }) => (
+              {fields.map(({ key, name, ...restField }) => (
                 <div key={key} style={{ marginBottom: "20px" }}>
                   <Form.Item
                     {...restField}
                     name={[name, "comment"]}
-                    fieldKey={[fieldKey, "comment"]}
                     rules={[
                       { required: true, message: "Review comment is required" },
                     ]}
@@ -233,7 +239,6 @@ const ProductEdit: React.FC = () => {
                   <Form.Item
                     {...restField}
                     name={[name, "rating"]}
-                    fieldKey={[fieldKey, "rating"]}
                     rules={[{ required: true, message: "Rating is required" }]}
                   >
                     <InputNumber
@@ -246,7 +251,7 @@ const ProductEdit: React.FC = () => {
                   </Form.Item>
                   <Button
                     onClick={() => remove(name)}
-                    type="danger"
+                    type="dashed"
                     style={{ marginRight: "10px" }}
                   >
                     Remove Review
