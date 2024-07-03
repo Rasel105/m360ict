@@ -1,0 +1,20 @@
+body {
+    font-family: Arial, sans-serif;
+  }
+  
+  .ant-table {
+    margin: 20px;
+  }
+  
+  .ant-form {
+    margin: 20px;
+  }
+  
+  .ant-input {
+    margin-bottom: 10px;
+  }
+  
+  .ant-btn {
+    margin-top: 10px;
+  }
+  
